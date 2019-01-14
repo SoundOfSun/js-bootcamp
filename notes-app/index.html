@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- Installing live-server failed due to level of authorization -->
+<!-- Run the server by typing in the terminal from js-bootcamp: npx live-server notes-app -->
+<html>
+    <head>
+        <!-- Information about the page -->
+        <meta charset="UTF-8">
+        <meta name="description" content="Notes App - js-bootcamp">
+        <meta name="keywords" content="HTML,CSS,JavaScript">
+        <meta name="author" content="SoundOfSun">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+       <h1>Notes App</h1> 
+       <h2>Takes notes and never forget</h2>
+       <h3>This application was created by SoundOfSun</h3>
+
+       <label for="search-text">Find a note:</label>
+       <input id="search-text" type="text" placeholder="Filter notes...">
+
+       <!-- Dropdown -->
+       <select id="filter-by">
+           <option value="byEdited">Sort by last edited</option>
+           <option value="byCreated">Sort by recently created</option>
+           <option value="alphabetical">Sort alphabetically</option>
+       </select>
+
+       <!-- <p class="note">Some note text</p>
+       <p class="note">Some note text</p>
+       <p class="note">Some note text</p>
+       <p class="note">Some note text</p> -->
+
+       <div id="notes">
+        <!-- Where JS renders the <p>s -->
+       </div>
+
+       <!-- Add a note -->
+       <!-- <form action="" id="add-note-form">
+           <input type="text" placeholder="Add a note..." name="addNote">
+           <button id="create-btn">Create Note</button>
+       </form> -->
+
+       <!-- Checkbox -->
+       <!-- Note: When label doesn't have a for attribute, the input living inside can be clicked, and so the text can too. -->
+       <!-- <label>
+            <input id="for-fun" type="checkbox"> Check me for fun
+       </label> -->
+
+       <!-- <button id="remove-btn">Remove All Notes</button> -->
+
+       <!-- Load script  after page is loaded -->
+       <script src="notes-app.js"></script>
+    </body>
+</html>

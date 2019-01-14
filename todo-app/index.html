@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- Installing live-server failed due to level of authorization -->
+<!-- Run the server by typing in the terminal from js-bootcamp: npx live-server todo-app -->
+<html>
+    <head>
+        <!-- Information about the page -->
+        <meta charset="UTF-8">
+        <meta name="description" content="Task Manager App - js-bootcamp">
+        <meta name="keywords" content="HTML,CSS,JavaScript">
+        <meta name="author" content="SoundOfSun">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+       <h1>Todo App</h1> 
+       <h2>This application was created by SoundOfSun</h2>
+
+       <label for="search-text">Find a to-do:</label>
+       <input id="search-text" type="text" placeholder="Type a to-do...">
+
+        <!-- Checkbox -->
+        <label>
+            <input id="hide-completed" type="checkbox"> Hide completed tasks
+        </label>
+    
+       <div id="todos">
+            <!-- to-dos rendered by JS -->
+       </div>
+
+       <!-- <h3>TO DO</h3>
+       <p>Task 1 : Clean the house</p>
+       <p>Task 2 : Go for groceries</p>
+       <p>Task 3 : Water the plants</p>
+       <p>Task 4 : Declutter drawers</p>
+       <p>Task 5 : Plan week ahead</p> -->
+       
+        <form action="" id="add-todo-form">
+            <input name="addTodo" type="text" placeholder="Type a to-do...">
+            <button id="add-btn">Add To Do</button>  
+        </form>
+
+        <!-- Load script  after page is loaded -->
+        <script src="todo-app.js"></script>
+    </body>
+</html>
