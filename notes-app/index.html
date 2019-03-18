@@ -25,20 +25,12 @@
            <option value="alphabetical">Sort alphabetically</option>
        </select>
 
-       <!-- <p class="note">Some note text</p>
-       <p class="note">Some note text</p>
-       <p class="note">Some note text</p>
-       <p class="note">Some note text</p> -->
-
        <div id="notes">
         <!-- Where JS renders the <p>s -->
        </div>
 
        <!-- Add a note -->
-       <!-- <form action="" id="add-note-form">
-           <input type="text" placeholder="Add a note..." name="addNote">
-           <button id="create-btn">Create Note</button>
-       </form> -->
+        <button id="create-btn">Create Note</button>
 
        <!-- Checkbox -->
        <!-- Note: When label doesn't have a for attribute, the input living inside can be clicked, and so the text can too. -->
@@ -48,7 +40,13 @@
 
        <!-- <button id="remove-btn">Remove All Notes</button> -->
 
-       <!-- Load script  after page is loaded -->
+       <!-- Load script after page is loaded : order matters ! -->
+       <!-- UUID v4 random -->
+       <script src="uuidv4.js"></script>
+       <!-- momentjs -->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+       <!-- Our scripts -->
+       <script src="notes-functions.js"></script>
        <script src="notes-app.js"></script>
     </body>
 </html>
