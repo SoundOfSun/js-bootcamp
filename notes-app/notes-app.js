@@ -1,3 +1,5 @@
+'use strict'
+
 let notes = getSavedNotes()
 
 // TASK : render the data in the HTML
@@ -11,7 +13,7 @@ renderNotes(notes, filters)
 
 // TASK : When click button, add a note
 
-document.querySelector('#create-btn').addEventListener('click', function (e) {
+document.querySelector('#create-btn').addEventListener('click', (e) => {
     // console.log('Button has been clicked !')
     // 1. Use uuidv4 to generate a random id
     const id = uuidv4()
@@ -39,14 +41,14 @@ document.querySelector('#create-btn').addEventListener('click', function (e) {
 
 // TASK : Filter notes according to user input
 
-document.querySelector('#search-text').addEventListener('input', function(e) {
+document.querySelector('#search-text').addEventListener('input', (e) => {
     filters.searchText = e.target.value
     renderNotes(notes, filters)
 })
 
 // TASK : Listen for a dropdown
 
-document.querySelector('#filter-by').addEventListener('change', function  (e) {
+document.querySelector('#filter-by').addEventListener('change', (e) => {
     // console.log(e.target.value)
     filters.sortBy = e.target.value
     renderNotes(notes, filters)
@@ -54,7 +56,7 @@ document.querySelector('#filter-by').addEventListener('change', function  (e) {
 
 // TASK : Listen  for a change of text from the edit page on the home page
 
-window.addEventListener('storage', function (e) {
+window.addEventListener('storage', (e) => {
     if (e.key === 'notes') {
         // 1. Parse the  new data and update notes
         notes = JSON.parse(e.newValue)

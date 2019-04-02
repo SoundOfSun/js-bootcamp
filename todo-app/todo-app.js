@@ -1,3 +1,5 @@
+'use strict'
+
 let todos = getSavedTodos()
 
 // TASK : Filter todos according to input
@@ -13,14 +15,14 @@ renderTodos(todos, filters)
 
 // TASK : filter todos according to user input
 
-document.querySelector('#search-text').addEventListener('input', function(e) {
+document.querySelector('#search-text').addEventListener('input',(e) => {
     filters.searchText = e.target.value
     renderTodos(todos, filters)
 })
 
 // TASK : Add a todo
 
-document.querySelector('#add-todo-form').addEventListener('submit', function (e) {
+document.querySelector('#add-todo-form').addEventListener('submit', (e) => {
     // 1. Cancel default behaviour of the form (refresh)
     e.preventDefault()
 
@@ -49,7 +51,7 @@ document.querySelector('#add-todo-form').addEventListener('submit', function (e)
 
 // TASK : Listen for a checkbox
 
-document.querySelector('#hide-completed').addEventListener('change', function (e) {
+document.querySelector('#hide-completed').addEventListener('change', (e) => {
     // checked property is a boolean
     console.log(e.target.checked)
 

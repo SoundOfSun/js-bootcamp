@@ -1,34 +1,46 @@
 // FUNCTIONS
 
+'use strict'
+
 // Function 1 : Read existing todos from localStorage
 
-const getSavedTodos = function () {
+const getSavedTodos = () => {
     // 1. Read localStorage
     const todosJSON = localStorage.getItem('todos')
 
     // 2. Check content of localStorage
-    if (todosJSON !== null) {
-        // 3. Parse the data if there is any
-        return JSON.parse(todosJSON)
-    } else {
-        // 4. Empty array if no data
-        return []
+    // if (todosJSON !== null) {
+    //     // 3. Parse the data if there is any
+    //     return JSON.parse(todosJSON)
+    // } else {
+    //     // 4. Empty array if no data
+    //     return []
+    // }
+
+    // 3. Use try-catch  block to recover from potential error: the data parsed is NOT a JSON
+    try {
+        return todosJSON ? JSON.parse(todosJSON) : []
+    } catch (e) {
+        // if not JSON:
+        // at least empty array even if we lose data
+        return  []
     }
+
+    // return todosJSON !== null ? JSON.parse(todosJSON) : []
+    // return todosJSON ? JSON.parse(todosJSON) : []
 }
 
 // Function 2 : Save todos to localStorage
 
-const saveTodos = function (todos) {
+const saveTodos = (todos) => {
     localStorage.setItem('todos', JSON.stringify(todos))
 }
 
 // Function 3 : Remove a todo from the list
 
-const removeTodo = function (id) {
+const removeTodo = (id) => {
     // 1. Find the id of the todo we want to remove
-    const todoIndex = todos.findIndex(function (todo) {
-        return todo.id === id
-    })
+    const todoIndex = todos.findIndex((todo)  => todo.id === id)
 
     // 2. If there's a match  and the index exists, remove the element from the array.
     if (todoIndex  > -1) {
@@ -37,21 +49,22 @@ const removeTodo = function (id) {
 }
 
 // Function 4 : Toggle the completed value for a given todo
-const toggleTodo = function (id) {
+const toggleTodo = (id)  => {
     // 1. Find the element with the id that is passed
-    const todo = todos.find(function (todo) {
-        return todo.id === id
-    })
+    const todo = todos.find((todo) => todo.id === id)
 
     // 2. If there is a match, change the  current value of completed to the opposite boolean
-    if (todo !== undefined) {
+    // if (todo !== undefined) {
+    //     todo.completed = !todo.completed
+    // }
+    if (todo) {
         todo.completed = !todo.completed
     }
 }
 
 //  Function  5 : Generate the DOM structure for a todo
 
-const generateTodoDOM = function (todo) {
+const generateTodoDOM = (todo) => {
     // 1. Create the parent <div>
     const todoEl = document.createElement('div')
 
@@ -63,7 +76,7 @@ const generateTodoDOM = function (todo) {
     todoCheck.checked = todo.completed
 
     // 4. Listen for a change in the checkbox, the change triggers the updating of the completed property's value
-    todoCheck.addEventListener('change', function () {
+    todoCheck.addEventListener('change', () => {
         toggleTodo(todo.id)
         saveTodos(todos)
         renderTodos(todos, filters)
@@ -83,7 +96,7 @@ const generateTodoDOM = function (todo) {
     todoEl.appendChild(button)
 
     // 8. Re-generate the notes after one was removed
-    button.addEventListener('click', function() {
+    button.addEventListener('click', () => {
         removeTodo(todo.id)
         saveTodos(todos)
         renderTodos(todos, filters)
@@ -96,7 +109,7 @@ const generateTodoDOM = function (todo) {
 
 // Function  6 : Generate the summary  message on the DOM
 
-const generateSummaryDOM = function (countTasks) {
+const generateSummaryDOM = (countTasks) => {
     // 1. Create the element
     const summary = document.createElement('h2')
     // 2. Give the elemend some content
@@ -108,9 +121,9 @@ const generateSummaryDOM = function (countTasks) {
 
 // Function  7 : Render application todos
 
-const renderTodos = function (todos, filters) {
+const renderTodos = (todos, filters) => {
     // 1. Limit notes to  those who pass the filters
-    const filteredTodos = todos.filter(function (todo) {
+    const filteredTodos = todos.filter((todo) => {
         // value of input matches the text content of a or several todos text
         const searchTextMatch = todo.text.toLowerCase().includes(filters.searchText.toLowerCase())
         // when hideCompleted is TRUE (checkbox checked) OR todo.completed is FALSE
@@ -125,9 +138,7 @@ const renderTodos = function (todos, filters) {
     // In the browser, go to Source. Then with the escape key, toggle the console at the bottom
 
     // 2. Filter todos not completed
-    const incompleteTodos = filteredTodos.filter(function (todo) {
-        return !todo.completed
-    })
+    const incompleteTodos = filteredTodos.filter((todo) => !todo.completed)
     console.log(incompleteTodos)
 
     // 3. Count how many are false - for the summary  !
@@ -141,7 +152,7 @@ const renderTodos = function (todos, filters) {
     document.querySelector('#todos').appendChild(generateSummaryDOM(countTasks))
 
     // 6. Add a <p> for each todo above 
-    filteredTodos.forEach(function (todo, index) {
+    filteredTodos.forEach((todo, index) => {
         document.querySelector('#todos').appendChild(generateTodoDOM(todo))
     })
 }

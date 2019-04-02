@@ -1,33 +1,47 @@
 // FUNCTIONS
 
+// Strict mode can be used to avoid assigning values to undeclared variables, use reserved keywords as variable names and more!
+// Easier to create code without strange behaviour and that will continue to work in the future
+'use strict'
+
 // Function 1 : Read existing notes from localStorage
 
-const getSavedNotes = function () {
+const getSavedNotes = () => {
     // 1. Read localStorage
     const notesJSON = localStorage.getItem('notes')
 
     // 2. Check content of localStorage
-    if (notesJSON !== null) {
-        // 3. Parse the data if there is any
-        return JSON.parse(notesJSON)
-    } else {
-        // 4. Empty array if no data
-        return []
+    // if (notesJSON !== null) {
+    //     // 3. Parse the data if there is any
+    //     return JSON.parse(notesJSON)
+    // } else {
+    //     // 4. Empty array if no data
+    //     return []
+    // }
+
+    // 3. Use try-catch  block to recover from potential error: the data parsed is NOT a JSON
+    try {
+        return notesJSON ? JSON.parse(notesJSON) : []
+    } catch (e) {
+        // if not JSON:
+        // at least empty array even if we lose data
+        return  []
     }
+    
+    // return notesJSON !== null ? JSON.parse(notesJSON) : []
+    // return notesJSON ? JSON.parse(notesJSON) : []
 }
 
 // Function  2 : Save the notes to localStorage
 
-const saveNotes = function (notes) {
+const saveNotes = (notes) => {
     localStorage.setItem('notes',  JSON.stringify(notes))
 }
 
 // Function 3 : Remove a note from the list
 
-const removeNote = function(id) {
-    const noteIndex = notes.findIndex(function (note) {
-        return note.id === id
-    })
+const removeNote = (id) => {
+    const noteIndex = notes.findIndex((note) => note.id === id)
 
     if (noteIndex  > -1) {
         notes.splice(noteIndex, 1)
@@ -36,7 +50,7 @@ const removeNote = function(id) {
 
 // Function 4 : Generate the DOM structure for a note
 
-const generateNoteDOM = function (note) {
+const generateNoteDOM = (note) => {
     // 1. Create the elements
     const noteEl = document.createElement('div')
     const textEl = document.createElement('a')
@@ -49,7 +63,7 @@ const generateNoteDOM = function (note) {
     noteEl.appendChild(button)
 
     // 4. Re-generate the notes after one was removed
-    button.addEventListener('click', function() {
+    button.addEventListener('click', () => {
         removeNote(note.id)
         saveNotes(notes)
         renderNotes(notes, filters)
@@ -75,7 +89,7 @@ const generateNoteDOM = function (note) {
 }
 
 // Function 5 : Sort notes by one of three ways
-const sortNotes =  function  (notes, sortBy) {
+const sortNotes = (notes, sortBy) => {
     if (sortBy === 'byEdited') {
         // Reminder: the sort method doesn't work on each element of the array but on two items being compared
         return notes.sort(function (a, b) {
@@ -89,7 +103,7 @@ const sortNotes =  function  (notes, sortBy) {
             }
         })
     } else if (sortBy === 'byCreated') {
-        return notes.sort(function (a, b) {
+        return notes.sort((a, b) => {
             // if a has been created more recently  than b
             if (a.createdAt > b.createdAt) {
                 return -1
@@ -100,7 +114,7 @@ const sortNotes =  function  (notes, sortBy) {
             }
         })
     } else if (sortBy === 'alphabetical') {
-        return notes.sort(function (a, b) {
+        return notes.sort((a, b) => {
             // if a's title is before b - alphabetically
             //  toLowerCase to make this case insensitive
             if (a.title.toLowerCase() < b.title.toLowerCase()) {
@@ -118,19 +132,17 @@ const sortNotes =  function  (notes, sortBy) {
 
 // Function 6 : Render application notes
 
-const renderNotes = function (notes, filters) {
+const renderNotes = (notes, filters) => {
     // limit notes to  those who pass the filters
     notes = sortNotes(notes, filters.sortBy)
-    const filteredNotes = notes.filter(function (note) {
-        return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
-    })
+    const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(filters.searchText.toLowerCase()))
     console.log(filteredNotes)
 
     // clear the <div> holding the notes before rendering filteredNotes
     document.querySelector('#notes').innerHTML = ''
 
     // render notes according to the user input
-    filteredNotes.forEach(function (note) {
+    filteredNotes.forEach((note) => {
         // create note
         const noteEl = generateNoteDOM(note) 
         // append note to the <div>     
@@ -140,6 +152,6 @@ const renderNotes = function (notes, filters) {
 
 // Function 7 : Generate the last edited message
 
-const generateLastEdited = function (timestamp) {
+const generateLastEdited = (timestamp) => {
     return `Last edited ${moment(timestamp).fromNow()}`
 }
